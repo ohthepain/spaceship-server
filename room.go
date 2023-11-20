@@ -1,11 +1,17 @@
 package main
 
+import (
+	"github.com/google/uuid"
+)
+
 type Spaceship struct {
-	XPos      float32
-	YPos      float32
-	Rotation  float32
-	XVelocity float32
-	YVelocity float32
+	XPos          float32
+	YPos          float32
+	Rotation      float32
+	XVelocity     float32
+	YVelocity     float32
+	Acceleration  float32
+	PolarVelocity float32
 }
 
 type Missile struct {
@@ -22,7 +28,7 @@ type Player struct {
 }
 
 type Room struct {
-	Name       string
+	RoomId     uuid.UUID
 	Player1    Player
 	Player2    Player
 	Spaceship1 Spaceship
@@ -31,7 +37,7 @@ type Room struct {
 	Missiles2  []Missile
 }
 
-func NewRoom() *Room {
+func NewRoom(roomId uuid.UUID) *Room {
 	var player1 *Player
 	player1 = new(Player)
 	player1.Name = "Player1"
@@ -44,7 +50,7 @@ func NewRoom() *Room {
 
 	var room *Room
 	room = new(Room)
-	room.Name = "main"
+	room.RoomId = roomId
 	room.Player1 = *player1
 	room.Player2 = *player2
 
